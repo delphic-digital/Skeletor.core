@@ -1,5 +1,5 @@
 /**
- * @copyright   2010-2016, The Skeletor Project
+ * @copyright   2016, The Skeletor Project
  * @license     http://opensource.org/licenses/BSD-3-Clause
  */
 
@@ -33,12 +33,12 @@ define(['jquery'],function ($){
 			return;
 		},
 		/**
-   	 * @function
-   	 * Populates the _uuids array with pointers to each individual plugin instance.
-   	 * Adds the `zfPlugin` data-attribute to programmatically created plugins to allow use of $(selector).foundation(method) calls.
-   	 * @param {Object} plugin - an instance of a plugin, usually `this` in context.
-   	 * @param {String} name - the name of the plugin, passed as a camelCased string.
-   	 */
+		 * @function
+		 * Populates the _uuids array with pointers to each individual plugin instance.
+		 * Adds the `zfPlugin` data-attribute to programmatically created plugins to allow use of $(selector).foundation(method) calls.
+		 * @param {Object} plugin - an instance of a plugin, usually `this` in context.
+		 * @param {String} name - the name of the plugin, passed as a camelCased string.
+		 */
 		instantiatePlugin: function(plugin, name){
 			var pluginName = name ? hyphenate(name) : functionName(plugin.constructor).toLowerCase();
 			plugin.uuid = this.GetYoDigits(6, pluginName);
@@ -48,13 +48,13 @@ define(['jquery'],function ($){
 			this._uuids.push(plugin.uuid);
 		},
 		GetYoDigits: function (length, namespace) {
-      length = length || 6;
-      return Math.round(Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)).toString(36).slice(1) + (namespace ? '-' + namespace : '');
-    },
+			length = length || 6;
+			return Math.round(Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)).toString(36).slice(1) + (namespace ? '-' + namespace : '');
+		},
 	};
 
 	//The skeletor jquery plugin
-	//Thanks to Zurbs Foundation for this pattern
+	//Thanks to Zurbs Foundation for there hardwork on this pattern
 
 	var skeletor = function(method) {
 		var type = typeof method;
