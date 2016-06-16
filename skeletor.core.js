@@ -50,23 +50,29 @@ define(['jquery'],function ($){
 	var skeletor = function(method) {
 		var type = typeof method;
 
-		if(type === 'undefined'){//needs a parameter passed as a method
+		if(type === 'undefined'){ //needs a parameter passed as a method
 			throw new ReferenceError("We're sorry, you have to pass a method for " + (plugClass ? functionName(plugClass) : 'this element') + '.');
-		}else if(type === 'string'){//an individual method to invoke on a plugin or group of plugins
-			var args = Array.prototype.slice.call(arguments, 1);//collect all the arguments, if necessary
-			var plugClass = this.data('skeletorPlugin');//determine the class of plugin
-			if(plugClass !== undefined && plugClass[method] !== undefined){//make sure both the class and method exist
-				if(this.length === 1){//if there's only one, call it directly.
+
+		}else if(type === 'string'){ //an individual method to invoke on a plugin or group of plugins
+
+			var args = Array.prototype.slice.call(arguments, 1),
+			    plugClass = this.data('skeletorPlugin'); //determine the class of plugin
+
+			if(plugClass !== undefined && plugClass[method] !== undefined){ //make sure both the class and method exist
+
+				if(this.length === 1){ //if there's only one, call it directly.
 					plugClass[method].apply(plugClass, args);
+
 				}else{
-					this.each(function(i, el){//otherwise loop through the jQuery collection and invoke the method on each
+
+					this.each(function(i, el){ //otherwise loop through the jQuery collection and invoke the method on each
 						plugClass[method].apply($(el).data('skeletorPlugin'), args);
 					});
 				}
-			}else{//error for no class or no method
+			}else{ //error for no class or no method
 				throw new ReferenceError("We're sorry, '" + method + "' is not an available method for " + (plugClass ? functionName(plugClass) : 'this element') + '.');
 			}
-		}else{//error for invalid argument type
+		}else{ //error for invalid argument type
 				throw new TypeError(`We're sorry, ${type} is not a valid parameter. You must use a string representing the method you wish to invoke.`);
 			}
 		return this;
