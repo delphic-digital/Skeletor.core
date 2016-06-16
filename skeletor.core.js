@@ -32,29 +32,20 @@ define(['jquery'],function ($){
 
 			return;
 		},
-		/**
-		 * @function
-		 * Populates the _uuids array with pointers to each individual plugin instance.
-		 * Adds the `zfPlugin` data-attribute to programmatically created plugins to allow use of $(selector).foundation(method) calls.
-		 * @param {Object} plugin - an instance of a plugin, usually `this` in context.
-		 * @param {String} name - the name of the plugin, passed as a camelCased string.
-		 */
+
 		instantiatePlugin: function(plugin, name){
 			var pluginName = name ? hyphenate(name) : functionName(plugin.constructor).toLowerCase();
-			plugin.uuid = this.GetYoDigits(6, pluginName);
+			plugin.uuid = GetYoDigits(6, pluginName);
 
 			if(!plugin.$element.data('skeletorPlugin')){ plugin.$element.data('skeletorPlugin', plugin); }
 
 			this._uuids.push(plugin.uuid);
-		},
-		GetYoDigits: function (length, namespace) {
-			length = length || 6;
-			return Math.round(Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)).toString(36).slice(1) + (namespace ? '-' + namespace : '');
-		},
+		}
+
 	};
 
 	//The skeletor jquery plugin
-	//Thanks to Zurbs Foundation for there hardwork on this pattern
+	//Thanks to Zurbs Foundation for their hardwork on this pattern
 
 	var skeletor = function(method) {
 		var type = typeof method;
@@ -101,6 +92,11 @@ define(['jquery'],function ($){
 	// Thank you: http://stackoverflow.com/a/8955580
 	function hyphenate(str) {
 		return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+	}
+
+	function GetYoDigits(length, namespace) {
+		length = length || 6;
+		return Math.round(Math.pow(36, length + 1) - Math.random() * Math.pow(36, length)).toString(36).slice(1) + (namespace ? '-' + namespace : '');
 	}
 
 
