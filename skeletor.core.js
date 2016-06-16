@@ -17,31 +17,7 @@ define(['jquery'],function ($){
 		_plugins: {},
 
 		_uuids: [],
-
-		registerPlugin: function(plugin, name) {
-
-			// Object key to use when adding to global Skeletor object
-			// Examples: Skeletor.Reveal, Skeletor.OffCanvas
-			var className = (name || functionName(plugin));
-
-			// Object key to use when storing the plugin
-			var attrName  = hyphenate(className);
-
-			// Add to the Skeletor object and the plugins list
-			this._plugins[attrName] = this[className] = plugin;
-
-			return;
-		},
-
-		instantiatePlugin: function(plugin, name){
-			var pluginName = name ? hyphenate(name) : functionName(plugin.constructor).toLowerCase();
-			plugin.uuid = GetYoDigits(6, pluginName);
-
-			if(!plugin.$element.data('skeletorPlugin')){ plugin.$element.data('skeletorPlugin', plugin); }
-
-			this._uuids.push(plugin.uuid);
-		}
-
+		Plugin: Plugin
 	};
 
 	//The skeletor jquery plugin
@@ -76,6 +52,64 @@ define(['jquery'],function ($){
 				throw new TypeError(`We're sorry, ${type} is not a valid parameter. You must use a string representing the method you wish to invoke.`);
 			}
 		return this;
+	}
+
+	/**
+	 * Plugin base constructor
+	 */
+
+	function Plugin(element, options, defaultOptions) {
+		this.options = $.extend(true, {}, defaultOptions, options);
+		this.$element = element || $(document);
+
+		if (typeof this._init !== 'function') {
+			throw this.name + ' needs an _init method';
+		}
+
+		//Store plugin attributes in Skeletor
+		var pluginName = functionName(this.constructor).toLowerCase();
+		this.uuid = GetYoDigits(6, pluginName);
+		Skeletor._uuids.push(this.uuid);
+		if(!this.$element.data('skeletorPlugin')){ this.$element.data('skeletorPlugin', this); }
+
+		this._init(element);
+	}
+
+	/**
+	 * Plugin trigger function attached to base
+	 */
+
+	 Plugin.prototype._trigger = function(eventName, data) {
+	 	eventName in this.options && this.options[eventName].call(this, $.Event(this.name + ':' + eventName, {bubbles: false}), data);
+	};
+
+	/**
+	 * Plugin create function that inherits off of base
+	 */
+
+	Plugin.create = function(SubConstructor, prototype) {
+
+		//Set plugin base to __super__ property of plugin
+		SubConstructor.__super__ = Plugin;
+
+		//Inherit base properties
+		for (var key in Plugin.prototype) {
+			if (!SubConstructor.prototype[key]) {
+				SubConstructor.prototype[key] = Plugin.prototype[key];
+			}
+		}
+
+		SubConstructor.prototype = $.extend(true, SubConstructor.prototype, prototype);
+
+		SubConstructor.prototype.constructor = SubConstructor;
+		SubConstructor.prototype.name = functionName(SubConstructor);
+
+		var className = SubConstructor.prototype.name;
+		var attrName  = hyphenate(className);
+
+		// Add to the Skeletor object and the plugins list
+		Skeletor._plugins[attrName] = Skeletor[className] = SubConstructor;
+
 	}
 
 	//UTILS
