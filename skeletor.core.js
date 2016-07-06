@@ -8,14 +8,8 @@ define(['jquery'],function ($){
 	// Global Skeletor object
 
 	var Skeletor = {
-		namespace: '',
-		debug: false,
-		messages: {
-			loading: 'Loading...',
-			error: 'An error has occurred!'
-		},
+		VERSION: '0.1.0',
 		_plugins: {},
-
 		_uuids: [],
 		Plugin: Plugin
 	};
