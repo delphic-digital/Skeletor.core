@@ -8,7 +8,7 @@ define(['jquery'],function ($){
 	// Global Skeletor object
 
 	var Skeletor = {
-		VERSION: '0.1.0',
+		VERSION: '0.2.0',
 		_plugins: {},
 		_uuids: [],
 		Plugin: Plugin
@@ -28,7 +28,8 @@ define(['jquery'],function ($){
 			var args = Array.prototype.slice.call(arguments, 1),
 			    plugClass = this.data('skeletorPlugin'); //determine the class of plugin
 
-			if(plugClass !== undefined && plugClass[method] !== undefined){ //make sure both the class and method exist
+			//make sure both the class and method exist, skip private methods
+			if(plugClass !== undefined && method.charAt(0) !== '_' && plugClass[method] !== undefined){
 
 				if(this.length === 1){ //if there's only one, call it directly.
 					plugClass[method].apply(plugClass, args);
