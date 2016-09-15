@@ -8,7 +8,7 @@ define(['jquery'],function ($){
 	// Global Skeletor object
 
 	var Skeletor = {
-		VERSION: '0.2.0',
+		VERSION: '0.2.2',
 		_plugins: {},
 		_uuids: [],
 		Plugin: Plugin
