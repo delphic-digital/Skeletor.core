@@ -1,0 +1,45 @@
+{
+  "name": "skeletor.core",
+  "version": "2.0.0",
+  "description": "Skeletor's core code",
+  "main": "src/skeletor.core.js",
+  "jspm": {
+    "name": "skeletor.core",
+    "main": "src/skeletor.core.js",
+    "dependencies": {
+      "jquery": "npm:jquery@^3.1.1"
+    },
+    "devDependencies": {
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.15"
+    },
+    "overrides": {
+      "npm:jquery@3.1.1": {
+        "format": "amd"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delphic-digital/Skeletor.core.git"
+  },
+  "keywords": [
+    "Skeletor"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/delphic-digital/Skeletor.core/issues"
+  },
+  "homepage": "https://github.com/delphic-digital/Skeletor.core#readme",
+  "devDependencies": {
+    "fb-watchman": "^1.9.0",
+    "jspm": "^0.17.0-beta.28",
+    "watchman": "^0.1.8"
+  },
+  "scripts": {
+    "start": "npm-run-all --parallel serve watch:js",
+    "serve": "browser-sync start --server --files dist/**/*",
+    "watch:js": "jspm bundle src/skeletor.core.js dist/skeletor.core.js -wid",
+    "build": ""
+  }
+}
