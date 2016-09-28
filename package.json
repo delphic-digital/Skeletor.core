@@ -2,10 +2,10 @@
   "name": "skeletor.core",
   "version": "2.0.0",
   "description": "Skeletor's core code",
-  "main": "src/skeletor.core.js",
+  "main": "src/skeletor-core.js",
   "jspm": {
-    "name": "skeletor.core",
-    "main": "src/skeletor.core.js",
+    "name": "Skeletor",
+    "main": "src/skeletor-core.js",
     "dependencies": {
       "jquery": "npm:jquery@^3.1.1"
     },
@@ -39,7 +39,7 @@
   "scripts": {
     "start": "npm-run-all --parallel serve watch:js",
     "serve": "browser-sync start --server --files dist/**/*",
-    "watch:js": "jspm bundle src/skeletor.core.js dist/skeletor.core.js -wid",
+    "watch:js": "jspm bundle src/skeletor-core.js dist/skeletor-core.js -wid",
     "build": ""
   }
 }

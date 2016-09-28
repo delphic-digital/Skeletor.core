@@ -6327,7 +6327,7 @@ System.register('skeletor.core/skeletor.core.js', ['npm:systemjs-plugin-babel@0.
 				function Skeletor() {
 					_classCallCheck(this, Skeletor);
 
-					console.log('this is the skeletor class');
+					console.log('this is the skeletor class test');
 					console.log($.fn);
 				}
 

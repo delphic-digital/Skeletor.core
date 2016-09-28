@@ -1,20 +1,10 @@
 SystemJS.config({
   paths: {
     "npm:": "jspm_packages/npm/",
-    "skeletor.core/": "src/"
+    "Skeletor/": "src/"
   },
   browserConfig: {
-    "baseURL": "/",
-    "bundles": {
-      "dist/skeletor.core.js": [
-        "skeletor.core/skeletor.core.js",
-        "npm:jquery@3.1.1/dist/jquery.js",
-        "npm:jquery@3.1.1.json",
-        "npm:systemjs-plugin-babel@0.0.15/babel-helpers/createClass.js",
-        "npm:systemjs-plugin-babel@0.0.15.json",
-        "npm:systemjs-plugin-babel@0.0.15/babel-helpers/classCallCheck.js"
-      ]
-    }
+    "baseURL": "/"
   },
   devConfig: {
     "map": {
@@ -23,7 +13,7 @@ SystemJS.config({
   },
   transpiler: "plugin-babel",
   packages: {
-    "skeletor.core": {
+    "Skeletor": {
       "main": "skeletor.core.js",
       "meta": {
         "*.js": {
