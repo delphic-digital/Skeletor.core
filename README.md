@@ -1,1 +1,1 @@
-# Skeletor.core"
+# Skeletor.core

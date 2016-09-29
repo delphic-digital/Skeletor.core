@@ -56,7 +56,9 @@ class Skeletor {
 
 }
 
-export let skeletor = new Skeletor();
+let skeletor = new Skeletor();
 
 window.Skeletor = skeletor;
 $.fn.skeletor = Skeletor.jQueryPlugin;
+
+export default skeletor;
