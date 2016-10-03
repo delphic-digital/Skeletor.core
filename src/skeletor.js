@@ -69,8 +69,6 @@ class SkeletorPlugin {
 		//Store plugin on element for later retrievel
 		if(!this.$element.data('skeletorPlugin')){ this.$element.data('skeletorPlugin', this); }
 
-		console.log(skeletor)
-
 		//Store UUID with Skeletor
 		skeletor.registerInstance(this.UUID);
 	}
