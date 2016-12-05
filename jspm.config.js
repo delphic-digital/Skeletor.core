@@ -14,7 +14,7 @@ SystemJS.config({
   transpiler: "plugin-babel",
   packages: {
     "skeletor": {
-      "main": "skeletor.js",
+      "main": "skeletor.core.js",
       "meta": {
         "*.js": {
           "loader": "plugin-babel"
