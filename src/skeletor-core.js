@@ -51,6 +51,7 @@ class Skeletor {
 			}
 		})
 
+		//Define web component custom element
 		window.customElements.define(elementName, plugin);
 
 		console.info(`successfully registered skeletor plugin: ${plugin.name}`)
